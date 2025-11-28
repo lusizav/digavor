@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import BulkSniper from './pages/BulkSniper';
 import CreativeMixer from './pages/CreativeMixer';
+import SavedDomains from './pages/SavedDomains';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/bulk" element={<BulkSniper />} />
                         <Route path="/mixer" element={<CreativeMixer />} />
+                        <Route path="/saved" element={<SavedDomains />} />
                     </Routes>
                 </main>
                 <Footer />

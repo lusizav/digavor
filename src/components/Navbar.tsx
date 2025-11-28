@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe } from 'lucide-react';
+import { Globe, Heart } from 'lucide-react';
 
 const Navbar: React.FC = () => {
     const location = useLocation();
@@ -37,6 +37,12 @@ const Navbar: React.FC = () => {
                         </Link>
                         <Link to="/mixer" className={linkClass('/mixer')}>
                             Creative Mixer
+                        </Link>
+                        <Link to="/saved" className={linkClass('/saved')}>
+                            <div className="flex items-center gap-1">
+                                <Heart size={16} />
+                                Saved
+                            </div>
                         </Link>
                     </div>
                 </div>

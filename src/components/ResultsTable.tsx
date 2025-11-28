@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowUpDown, ExternalLink, Loader2 } from 'lucide-react';
+import { ArrowUpDown, ExternalLink, Loader2, History, TrendingUp, Scale, FileSearch } from 'lucide-react';
 import StatusBadge from './StatusBadge';
-import { getAffiliateLink } from '../utils/domainLogic';
+import {
+    getAffiliateLink,
+    getWaybackMachineLink,
+    getGoogleTrendsLink,
+    getTrademarkCheckLink,
+    getWhoisLink
+} from '../utils/domainLogic';
 
 interface DomainData {
     domain: string;
@@ -55,6 +61,10 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
         window.open(getAffiliateLink(domain), '_blank', 'noopener,noreferrer');
     };
 
+    const openIntelligenceTool = (url: string) => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+    };
+
     if (domains.length === 0) {
         return (
             <div className="text-center py-12 text-gray-500">
@@ -103,8 +113,43 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
                 <tbody className="divide-y divide-gray-200">
                     {sortedDomains.map((domainData, index) => (
                         <tr key={`${domainData.domain}-${index}`} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                                {domainData.domain}
+                            <td className="px-6 py-4">
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-sm font-medium text-gray-900">
+                                        {domainData.domain}
+                                    </span>
+                                    {/* Intelligence Toolbar - Compact for table */}
+                                    <div className="flex items-center gap-1">
+                                        <button
+                                            onClick={() => openIntelligenceTool(getWaybackMachineLink(domainData.domain))}
+                                            className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                                            title="Check Domain History (Spam Check)"
+                                        >
+                                            <History size={14} />
+                                        </button>
+                                        <button
+                                            onClick={() => openIntelligenceTool(getGoogleTrendsLink(domainData.domain))}
+                                            className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                                            title="Check Keyword Popularity"
+                                        >
+                                            <TrendingUp size={14} />
+                                        </button>
+                                        <button
+                                            onClick={() => openIntelligenceTool(getTrademarkCheckLink(domainData.domain))}
+                                            className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                                            title="Check Trademarks"
+                                        >
+                                            <Scale size={14} />
+                                        </button>
+                                        <button
+                                            onClick={() => openIntelligenceTool(getWhoisLink(domainData.domain))}
+                                            className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                                            title="Verify Ownership"
+                                        >
+                                            <FileSearch size={14} />
+                                        </button>
+                                    </div>
+                                </div>
                             </td>
                             <td className="px-6 py-4 text-sm font-bold text-primary-700">
                                 ${(domainData.value || 0).toLocaleString('en-US')}
@@ -149,3 +194,4 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
 };
 
 export default ResultsTable;
+

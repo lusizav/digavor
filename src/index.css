@@ -236,6 +236,23 @@
     @apply bg-blue-100 text-blue-900;
 }
 
+/* Toast Animation */
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+}
+
 /* Focus visible for accessibility */
 :focus-visible {
     @apply outline-none ring-4 ring-blue-200 ring-offset-2;
